@@ -18,9 +18,9 @@ export class ErrorInterceptor implements HttpInterceptor {
             if (evt instanceof HttpResponse) {
                 if(evt.status == 200) {
                     let message = evt.body.message;
-                    if (message !== null) {
+                    /*if (message !== null) {
                         this.toastrService.success("",message);
-                    }
+                    }*/
 
                 }
             }
