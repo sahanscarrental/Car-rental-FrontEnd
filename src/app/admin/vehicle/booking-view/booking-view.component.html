@@ -1,0 +1,132 @@
+
+
+<div class="col-md-12 mb-6">
+    <!-- Nav tabs -->
+    <tabset>
+        <tab heading="Booking Details">
+            <div class="col-8">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Pick Up</span>
+                    </div>
+                    <input [value]="booking.pickUpTime | date:'short'"  disabled="disabled" required="required" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Return</span>
+                    </div>
+                    <input [value]="booking.dropTime | date:'short'"  disabled="disabled" required="required" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                </div>
+                <div *ngIf="booking.extendedDropTime" class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Extended Return</span>
+                    </div>
+                    <input [value]="booking.extendedDropTime | date:'short'"  disabled="disabled" required="required" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                </div>
+                <div *ngIf="booking.bookingRecordState == 'PENDING'" class="input-group mb-3">
+                    <a (click)="cancel()" type="button" class="btn btn-warning">Cancel</a>
+                </div>
+                <div *ngIf="booking.bookingRecordState == 'PENDING'" class="input-group mb-3">
+                    <a (click)="handOveKey()" type="button" class="btn btn-primary">Hand Over Key</a>
+                </div>
+                <div *ngIf="booking.bookingRecordState == 'PICKED'" class="input-group mb-3">
+                    <a (click)="keyReceived()" type="button" class="btn btn-primary">Key Received</a>
+                </div>
+            </div>
+        </tab>
+        <tab heading="Addons">
+            <table class="table table-bordered table-striped table-sm">
+                <tbody>
+                    <tr *ngFor="let addon of booking.addons">
+                        <td>
+                            <img style="width: 50px" [src]="imgUrl+'/image/'+addon.imageId" alt="">
+                        </td>
+                        <td>{{addon.name}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </tab>
+        <tab heading="Driver Details">
+            <div class="col-8">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Full Name</span>
+                    </div>
+                    <input [value]="driver.name"  disabled="disabled" required="required" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Birthday</span>
+                    </div>
+                    <input [value]="driver.dob"  disabled="disabled" type="date" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Address</span>
+                    </div>
+                    <input [value]="driver.address"  disabled="disabled" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Email</span>
+                    </div>
+                    <input [value]="driver.email"  disabled="disabled" type="email" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">NIC</span>
+                    </div>
+                    <input [value]="driver.nic"  disabled="disabled" type="number" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Licence No</span>
+                    </div>
+                    <input [value]="driver.licenceNo"  disabled="disabled" type="number" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Phone No</span>
+                    </div>
+                    <input [value]="driver.phoneNo"  disabled="disabled" type="number" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                </div>
+
+
+                <span class="input-group-text">Licence Front Image</span>
+                <div class="input-group mb-3">
+                    <img class="img" [src]="imgUrl+'/image/'+driver.licenceFrontImageId" alt="">
+                </div>
+
+                <span class="input-group-text">Licence Back Image</span>
+                <div class="input-group mb-3">
+                    <img class="img"  [src]="imgUrl+'/image/'+driver.licenceBackImageId" alt="">
+                </div>
+
+                <span class="input-group-text">Utility Bill Image</span>
+                <div class="input-group mb-3">
+                    <img class="img" [src]="imgUrl+'/image/'+driver.utilityBillId" alt="">
+                </div>
+
+                <span class="input-group-text">Bank Statement Image</span>
+                <div class="input-group mb-3">
+                    <img class="img" [src]="imgUrl+'/image/'+driver.bankStatementId" alt="">
+                </div>
+
+                <span class="input-group-text">NIC Front Image</span>
+                <div class="input-group mb-3">
+                    <img class="img" [src]="imgUrl+'/image/'+driver.nicFrontImageId" alt="">
+                </div>
+
+                <span class="input-group-text">NIC Back Image</span>
+                <div class="input-group mb-3">
+                    <img class="img" [src]="imgUrl+'/image/'+driver.nicBackImageId" alt="">
+                </div>
+
+                <span class="input-group-text">Face Image</span>
+                <div class="input-group mb-3">
+                    <img class="img" [src]="imgUrl+'/image/'+driver.faceImageId" alt="">
+                </div>
+            </div>
+        </tab>
+    </tabset>
+</div><!--/.col-->

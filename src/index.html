@@ -1,0 +1,52 @@
+<!doctype html>
+<!--
+* CoreUI - Free Angular 11 Admin Template
+* @version v2.11.1
+* @link https://coreui.io/angular/
+* Copyright (c) 2017-2021 creativeLabs Łukasz Holeczek
+* Licensed under MIT (https://coreui.io/license)
+-->
+<html lang="en">
+<head>
+  <base href="./">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="CoreUI - Free Angular Admin Template">
+  <meta name="author" content="Łukasz Holeczek">
+  <meta name="keyword" content="Bootstrap,Admin,Template,Free,Angular,Dashboard,Typescript">
+<!--	<link rel="shortcut icon" href="assets/favicon.ico">-->
+	<title>BANGER & CO</title>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-118965717-3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    // Shared ID
+    gtag('config', 'UA-118965717-3');
+    // Angular ID
+    gtag('config', 'UA-118965717-4');
+  </script>
+
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<!--  <link rel="stylesheet" href="node_modules/ngx-snackbar/bundles/style.css">-->
+  <script>
+    PrintRecord = function() {
+      printData();
+    }
+
+    function printData() {
+      var divToPrint = document.getElementById("tablerecords");
+      newWin = window.open("");
+      newWin.document.write(divToPrint.outerHTML);
+      newWin.print();
+      newWin.close();
+    }
+  </script>
+</head>
+<body class="app">
+  <!-- App Loading... -->
+</body>
+</html>

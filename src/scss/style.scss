@@ -1,0 +1,29 @@
+// If you want to override variables do it here
+@import "variables";
+
+// Import styles
+@import "~@coreui/coreui/scss/coreui";
+
+// If you want to add something do it here
+@import "custom";
+
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+/******* Customized Bootstrap ********/
+
+$primary: #F77D0A;
+$secondary: #2B2E4A;
+$light: #F4F5F8;
+$dark: #1C1E32;
+
+$font-family-sans-serif: 'Rubik', sans-serif;
+
+$headings-font-family: 'Oswald', sans-serif;
+
+$body-color: #8486A0;
+
+$headings-color: $secondary;
+
+$enable-responsive-font-sizes: true;
+
+$enable-rounded: false;

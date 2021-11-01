@@ -1,0 +1,99 @@
+<div class="col-8">
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text">Full Name</span>
+        </div>
+        <input [value]="driver?.name"  disabled="disabled" required="required" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+    </div>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text">Birthday</span>
+        </div>
+        <input [value]=driverDOB  disabled="disabled" type="date" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+    </div>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text">Address</span>
+        </div>
+        <input [value]="driver?.address"  disabled="disabled" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+    </div>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text">Email</span>
+        </div>
+        <input [value]="driver?.email"  disabled="disabled" type="email" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+    </div>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text">NIC</span>
+        </div>
+        <input [value]="driver?.nic"  disabled="disabled" type="number" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+    </div>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text">Licence No</span>
+        </div>
+        <input [value]="driver?.licenceNo"  disabled="disabled" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+    </div>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text">Phone No</span>
+        </div>
+        <input [value]="driver?.phoneNo"  disabled="disabled" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+    </div>
+
+
+    <ng-container *ngIf="driver.licenceFrontImageId">
+        <span class="input-group-text">Licence Front Image</span>
+        <div class="input-group mb-3">
+            <img class="img" [src]="imgUrl+'/image/'+driver.licenceFrontImageId" alt="">
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="driver.councilTaxImageId">
+        <span class="input-group-text">Council Tax Image</span>
+        <div class="input-group mb-3">
+            <img class="img" [src]="imgUrl+'/image/'+driver.councilTaxImageId" alt="">
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="driver.utilityBillId">
+        <span class="input-group-text">Utility Bill Image</span>
+        <div class="input-group mb-3">
+            <img class="img" [src]="imgUrl+'/image/'+driver.utilityBillId" alt="">
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="driver.bankStatementId">
+        <span class="input-group-text">Bank Statement Image</span>
+        <div class="input-group mb-3">
+            <img class="img" [src]="imgUrl+'/image/'+driver.bankStatementId" alt="">
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="driver.nicFrontImageId">
+    <span class="input-group-text">NIC Front Image</span>
+    <div class="input-group mb-3">
+        <img class="img" [src]="imgUrl+'/image/'+driver.nicFrontImageId" alt="">
+    </div>
+    </ng-container>
+
+    <ng-container *ngIf="driver.nicBackImageId">
+    <span class="input-group-text">NIC Back Image</span>
+    <div class="input-group mb-3">
+        <img class="img" [src]="imgUrl+'/image/'+driver.nicBackImageId" alt="">
+    </div>
+    </ng-container>
+
+    <ng-container *ngIf="driver.faceImageId">
+    <span class="input-group-text">Face Image</span>
+    <div class="input-group mb-3">
+        <img class="img" [src]="imgUrl+'/image/'+driver.faceImageId" alt="">
+    </div>
+    </ng-container>
+
+    <div *ngIf="driver.driverState == 'ADMIN_DECISION_PENDING'" class="input-group mb-3" style="float: right">
+        <button (click)="activate()" class="btn bg-primary mr-2">Confirm Address</button>
+        <button (click)="reject()" class="btn bg-danger">Reject</button>
+    </div>
+</div>

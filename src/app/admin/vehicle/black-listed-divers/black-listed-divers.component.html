@@ -1,0 +1,53 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <i class="fa fa-align-justify"></i>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered table-striped table-sm">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <!--                        <th>Age</th>-->
+                        <th>NIC</th>
+                        <th>Phone No</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let driver of driverList">
+                        <td>{{driver.name}}</td>
+                        <!--                        <td>{{driver.age}}</td>-->
+                        <td>{{driver.nic}}</td>
+                        <td>{{driver.phoneNo}}</td>
+                        <td>
+                            <div class="btn-group mr-2" role="group" aria-label="First group">
+                                <a type="button" [state]="driver" routerLink="../driver-view" class="btn btn-secondary">View</a>
+                                <!--                                <button type="button" class="btn btn-secondary">2</button>-->
+                                <!--                                <button type="button" class="btn btn-secondary">3</button>-->
+                                <!--                                <button type="button" class="btn btn-secondary">4</button>-->
+                            </div>
+                            <!--                            <button (click)="delete(driver.id)" type="button" class="btn btn-block btn-danger">Danger</button>-->
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <!--                <nav>-->
+                <!--                    <ul class="pagination">-->
+                <!--                        <li class="page-item"><a class="page-link" href="#">Prev</a></li>-->
+                <!--                        <li class="page-item active">-->
+                <!--                            <a class="page-link" href="#">1</a>-->
+                <!--                        </li>-->
+                <!--                        <li class="page-item"><a class="page-link" href="#">2</a></li>-->
+                <!--                        <li class="page-item"><a class="page-link" href="#">3</a></li>-->
+                <!--                        <li class="page-item"><a class="page-link" href="#">4</a></li>-->
+                <!--                        <li class="page-item"><a class="page-link" href="#">Next</a></li>-->
+                <!--                    </ul>-->
+                <!--                </nav>-->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--            <img src="data:image/jpeg;base64, vnnkj" alt="">-->

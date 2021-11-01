@@ -1,0 +1,115 @@
+<div class="container-fluid bg-dark py-3 px-lg-5 d-none d-lg-block">
+    <div class="row" style="
+    display: flex;
+    justify-content: space-between;" >
+        <div class="text-lg-left mb-2 mb-lg-0">
+            <div class="d-inline-flex align-items-center">
+                <a class="text-body pr-3" href=""><i class="fa fa-phone-alt mr-2"></i>+94778712353</a>
+                <span class="text-body">|</span>
+                <a class="text-body px-3" href=""><i class="fa fa-envelope mr-2"></i>car.renting.banger@gmail.com</a>
+            </div>
+        </div>
+        <div class="text-lg-right">
+            <div class="row">
+                <!-- show black list badge if the driver is blacklisted-->
+                <ng-container *ngIf="isBlackListed">
+                    <div class="col-md-3">
+                        <img src="../../../assets/img/driver/blacklist.jpg" style="width: 50px; border-radius: 50%;"
+                             alt="black list image">
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="faceImageId">
+                    <div class="col-md-3" (click)="viewProfile()" style="padding-right: 77px; cursor: pointer">
+                        <img style="width: 70px; border-radius: 50%;" [src]="imgUrl+'/image/'+faceImageId"
+                             alt="profile_pic">
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="isLoggedIn">
+                    <div class="col-md-6" (click)="viewProfile()" style="cursor: pointer">
+                        <div class="row">{{this.displayName}}</div>
+                        <div class="row">{{this.displayUserName}}</div>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Topbar End -->
+
+
+<!-- Navbar Start -->
+<div class="container-fluid position-relative nav-bar p-0">
+    <div class="position-relative px-lg-5" style="z-index: 9;">
+        <nav class="navbar navbar-expand-lg bg-secondary navbar-dark py-3 py-lg-0 pl-3 pl-lg-5">
+            <a routerLink="home" class="navbar-brand">
+                <h1 class="text-uppercase text-primary mb-1">Banger & Co</h1>
+            </a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
+                <div class="navbar-nav ml-auto py-0">
+                    <a routerLink="home/"  class="nav-item nav-link hed active">Home</a>
+                    <a routerLink="home/booking-list"  class="nav-item hed nav-link">Booking</a>
+                    <a routerLink="home/car-list"  class="nav-item hed nav-link">Vehicles</a>
+                    <a routerLink="home/contact-us" class="nav-item nav-link">Contact</a>
+                    <a *ngIf="token == undefined" routerLink="/register"  class="nav-item hed nav-link">Register</a>
+                    <a *ngIf="token == undefined" routerLink="/login"  class="nav-item hed nav-link">Login</a>
+                    <a *ngIf="token != undefined" (click)="logOut()" class="nav-item hed nav-link">Logout</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+<!-- Navbar End -->
+
+<router-outlet></router-outlet>
+<!-- Footer Start -->
+<div class="container-fluid bg-secondary py-5 px-sm-3 px-md-5" style="margin-top: 90px;">
+    <div class="row pt-5">
+        <div class="col-lg-4 col-md-6 mb-5" style="color: wheat;">
+            <h4 class="text-uppercase text-light mb-4">Get In Touch</h4>
+            <p class="mb-2"><i class="fa fa-map-marker-alt text-white mr-3"></i>No.77, Star Avenue, Panadura, Sri Lanka</p>
+            <p class="mb-2"><i class="fa fa-phone-alt text-white mr-3"></i>+94778712353</p>
+            <p><i class="fa fa-envelope text-white mr-3"></i>car.renting.banger@gmail.com</p>
+        </div>
+        <div class="col-lg-4 col-md-6 mb-5">
+            <h4 class="text-uppercase text-light mb-4">Usefull Links</h4>
+            <div class="d-flex flex-column justify-content-start">
+                <a class="text-body mb-2" routerLink="/terms"><i class="fa fa-angle-right text-white mr-2"></i>Term & Conditions</a>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 mb-5">
+            <h4 class="text-uppercase text-light mb-4">Car Gallery</h4>
+            <div class="row mx-n1">
+                <div class="col-4 px-1 mb-2">
+                    <img class="w-100" src="/assets/img/driver/gallery-1.jpg" alt="">
+                </div>
+                <div class="col-4 px-1 mb-2">
+                    <img class="w-100" src="/assets/img/driver/gallery-2.jpg" alt="">
+                </div>
+                <div class="col-4 px-1 mb-2">
+                    <img class="w-100" src="/assets/img/driver/gallery-3.jpg" alt="">
+                </div>
+                <div class="col-4 px-1 mb-2">
+                    <img class="w-100" src="/assets/img/driver/gallery-4.jpg" alt="">
+                </div>
+                <div class="col-4 px-1 mb-2">
+                    <img class="w-100" src="/assets/img/driver/gallery-5.jpg" alt="">
+                </div>
+                <div class="col-4 px-1 mb-2">
+                    <img class="w-100" src="/assets/img/driver/gallery-6.jpg" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<div class="container-fluid bg-dark py-4 px-sm-3 px-md-5">-->
+<!--    <p class="mb-2 text-center text-body">&copy; <a href="#">Your Site Name</a>. All Rights Reserved.</p>-->
+<!--    <p class="m-0 text-center text-body">Designed by <a href="https://htmlcodex.com">HTML Codex</a></p>-->
+<!--</div>-->
+<!-- Footer End -->
+
+
+<!-- Back to Top -->
+<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="fa fa-angle-double-up"></i></a>

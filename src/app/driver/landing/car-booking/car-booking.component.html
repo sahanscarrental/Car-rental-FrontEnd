@@ -1,0 +1,208 @@
+<!-- Detail Start -->
+<div class="container-fluid pt-5">
+    <div class="container pt-5 pb-3">
+        <h1 class="display-4 text-uppercase mb-5">{{car.name}}</h1>
+        <div class="row align-items-center pb-2">
+            <div class="col-lg-6 mb-4">
+                <img class="img-fluid" [src]="imgUrl+'/image/'+car.imageId" alt="">
+            </div>
+            <div class="col-lg-6 mb-4">
+                <h4 class="mb-2">{{car.costPerDay}} {{car.currency}}/Day</h4>
+                <div class="d-flex mb-3">
+                    <h6 class="mr-2">Rating:</h6>
+                    <div class="d-flex align-items-center justify-content-center mb-1">
+                        <small class="fa fa-star text-primary mr-1"></small>
+                        <small class="fa fa-star text-primary mr-1"></small>
+                        <small class="fa fa-star text-primary mr-1"></small>
+                        <small class="fa fa-star text-primary mr-1"></small>
+                        <small class="fa fa-star-half-alt text-primary mr-1"></small>
+                        <small>(250)</small>
+                    </div>
+                </div>
+                <p>{{car.description}}</p>
+            </div>
+        </div>
+        <div class="row mt-n3 mt-lg-0 pb-4">
+            <div class="col-md-3 col-6 mb-2">
+                <i class="fa fa-car text-primary mr-2"></i>
+                <span>{{car.fuelType}}</span>
+            </div>
+            <div class="col-md-3 col-6 mb-2">
+                <i class="fa fa-cogs text-primary mr-2"></i>
+                <span>{{car.gearType}}</span>
+            </div>
+            <div class="col-md-3 col-6 mb-2">
+                <i class="fa fa-road text-primary mr-2"></i>
+                <span>{{car.seats}} seats</span>
+            </div>
+            <div class="col-md-3 col-6 mb-2">
+                <i class="fa fa-eye text-primary mr-2"></i>
+                <span>{{car.vehicleCategory}}</span>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Detail End -->
+
+
+<!-- Car Booking Start -->
+<div class="container-fluid pb-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <h2 class="mb-4" style=" text-align: center;">Booking Detail</h2>
+                <form [formGroup]="bookingForm">
+                    <div class="mb-5">
+                        <div class="row">
+                            <ng-container *ngIf="bookingRecord">
+                                <div class="row">
+                                    <div class="alert alert-success" style=" margin-left: 13px;">
+                                        Status: <strong>{{bookingRecord?.bookingRecordState}} </strong>
+                                    </div>
+                                </div>
+                            </ng-container>
+                            <div class="row">
+                                <div class="msg-info card bg-info">
+                                    <div class="card-body">
+                                        Garage opens at 8:00am, and closes at 6pm.Therefore, any booking must be
+                                        collected and returned during this time.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="width: 75%">
+                                <div class="col-6 form-group">
+                                    <div class="date" id="date2" data-target-input="nearest">
+                                        <label>Pick up</label>
+                                        <input (change)="pickChange($event)" *ngIf="bookingRecord == null || bookingRecord == undefined" [min]="today" [max]="max1" formControlName="pickUpTime" type="datetime-local" class="form-control p-4 datetimepicker-input" placeholder="Pickup"
+                                               data-target="#date2" data-toggle="datetimepicker"
+                                        />
+                                        <ng-container *ngIf="bookingRecord != undefined">
+                                            <div class="alert alert-secondary">
+<!--                                                <strong>{{bookingForm.controls['pickUpTime'].value?.toString().replace('T', ' ').split('.')[0]}} </strong>-->
+                                                <strong>{{bookingForm.controls['pickUpTime'].value  |  date:'medium'}} </strong>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                                <div class="col-6 form-group">
+                                    <div class="date" id="time2" data-target-input="nearest">
+                                        <label>Return</label>
+                                        <input *ngIf="bookingRecord == null || bookingRecord == undefined"
+                                               [min]="minimumDropOffDay"
+                                               [max]="max2"
+                                               formControlName="dropTime" type="datetime-local" class="form-control p-4 datetimepicker-input" placeholder="Return"
+                                               data-target="#time2" data-toggle="datetimepicker" />
+                                        <ng-container *ngIf="bookingRecord != undefined">
+                                            <div class="alert alert-secondary">
+                                                <strong>{{bookingForm.controls['dropTime'].value |  date:'medium'}}</strong>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <ng-container *ngIf="previousBookingRecords == null || !hasCompletedBooking">
+                            <div class="row">
+                                <div class="card msg" style="
+                                        margin: 0;
+                                        width: 100%;
+                                        margin-bottom: 20px;">
+                                    <div class=" card-body">
+                                        This is your 1 st Booking. You can
+                                        return Vehicle after 6pm from your 2nd Booking
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-container>
+                        <div class="row">
+                            <div class="col-6 pl-0 form-group" *ngIf="(bookingRecord != null || bookingRecord != undefined) && bookingRecord.bookingRecordState === 'PICKED'">
+                                <div class="date"  data-target-input="nearest">
+                                    <label>Extend to</label>
+                                    <input *ngIf="bookingRecord != null || bookingRecord != undefined"
+                                           [min]="this.minimumExtendTime"
+                                           [max]="this.maximumExtendTime"
+                                           formControlName="extendedDropTime" type="datetime-local" class="form-control p-4 datetimepicker-input" placeholder="Extend to" data-toggle="datetimepicker"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-md-12 form-group" *ngIf="(bookingRecord == null && driver && driver.successBookings > 0 ) || (bookingRecord != null && hasCompletedBooking)">
+                                    <div class="row">
+                                        <div class="col-3">
+                                            <div class="date"   data-target-input="nearest">
+                                                <p><label>Return after 6pm</label></p>
+
+                                                <ng-container *ngIf="bookingRecord && hasCompletedBooking; else returnAtNightElseBlock">
+                                                    <input
+                                                        [attr.disabled]="this.disableReturnAtNight ? true : null"
+                                                        value="0"
+                                                        formControlName="returnAtNight"
+                                                        type="checkbox"
+                                                        class="chcek form-check-input">
+                                                </ng-container>
+                                                <ng-template #returnAtNightElseBlock>
+                                                    <input [disabled]="'disabled'"
+                                                            value="0"
+                                                            formControlName="returnAtNight"
+                                                            type="checkbox"
+                                                            class="chcek form-control p-4 a"/>
+                                                </ng-template>
+                                            </div>
+                                        </div>
+                                        <div class="col-9 p-0">
+                                            <div class="card-body">
+                                                The hirer has agreed with ‘Banger & Co’ for a
+                                                late return in which case you can return the vehicle and drop the Keys through Office
+                                                Letterbox.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row" style="float: right">
+                            <button *ngIf="bookingRecord == null || (bookingRecord != null &&
+                             (bookingRecord.bookingRecordState === 'PENDING'||  bookingRecord.bookingRecordState === 'PICKED'))"
+                                    type="submit" class="btn btn-sm btn-primary mx-3" style="font-size: 18px;border-radius: 13px;" (click)="submit()">
+                                <ng-container *ngIf="bookingRecord == null;else bookingRecordElsePart">
+                                    <i class="fa fa-taxi mr-2"></i>Book
+                                </ng-container>
+                                <ng-template #bookingRecordElsePart>
+                                    <i class="fa fa-edit mr-2"></i>Update
+                                </ng-template>
+                            </button>
+                            <button *ngIf="bookingRecord != null && bookingRecord != undefined && bookingRecord.bookingRecordState == 'PENDING'" (click)="cancel()"
+                                    class="btn btn-sm btn-danger" style="font-size: 18px;border-radius: 13px;">
+                                <i class="fa fa-ban mr-2"></i>Cancel Booking</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-4">
+                <div class="bg-banner p-5 mb-5">
+                    <h2 class="text-primary mb-4">Addons</h2>
+                    <form>
+                        <table class="table">
+                            <tbody>
+                            <tr style="color: white" *ngFor="let addon of addons">
+                                <td>
+                                    <img style="width: 100px" [src]="imgUrl+'/image/'+addon.imageId" alt="">
+                                </td>
+                                <td class="addon-name">{{addon.name}}</td>
+                                <td>
+                                    <input
+                                            [attr.disabled]="bookingRecord != null && bookingRecord.bookingRecordState !== 'PENDING'? true : null"
+                                            [checked]="isChecked(addon)"
+                                            (change)="addonChange($event)"
+                                            [value]="addon.id"
+                                            type="checkbox" class="form-check-input">
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Car Booking End -->

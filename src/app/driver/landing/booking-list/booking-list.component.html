@@ -1,0 +1,35 @@
+<!-- Rent A Car Start -->
+<div class="container-fluid py-5">
+    <div class="container pt-5 pb-3">
+        <h1 class="display-4 text-uppercase text-center mb-5">Your Booking</h1>
+        <table class="table table-bordered table-dark">
+            <thead>
+            <tr>
+                <th scope="col">Vehicle</th>
+                <th scope="col">Pick Up</th>
+                <th scope="col">Return</th>
+                <th scope="col">Extended Return</th>
+                <th scope="col">Return at Night</th>
+                <th scope="col">Cost</th>
+                <th scope="col">Currency</th>
+                <th scope="col">State</th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let bookingRecord of bookingRecords">
+                <td>{{bookingRecord?.vehicle?.name}}</td>
+                <td>{{bookingRecord?.pickUpTime | date:'short'}}</td>
+                <td>{{bookingRecord?.dropTime | date:'short'}}</td>
+                <td>{{bookingRecord?.extendedDropTime ?  (bookingRecord?.extendedDropTime | date:'short') : 'No' }}</td>
+                <td>{{bookingRecord?.returnAtNight ?  'Yes' : 'No' }}</td>
+                <td>{{bookingRecord?.cost | number}}</td>
+                <td>{{bookingRecord?.currency}}</td>
+                <td>{{bookingRecord?.bookingRecordState === 'FAILED_TO_PICK' ? 'Failed To Pick up' : bookingRecord?.bookingRecordState | titlecase}}</td>
+                <td><a routerLink="../car-booking" [state]="{car: bookingRecord.vehicle, bookingRecord: bookingRecord }" class="btn btn-info">view</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- Rent A Car End -->

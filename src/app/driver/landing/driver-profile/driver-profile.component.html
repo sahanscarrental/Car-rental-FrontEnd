@@ -1,0 +1,167 @@
+<div class="container">
+    <h1 style="padding: 13px;">My Profile</h1>
+    <div class="col-8">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Status</span>
+            </div>
+            <div class="form-control" [ngStyle]="{'background-color':driver?.driverState=== 'BLACK_LISTED' ? '#F77D0A'
+                        : (driver?.driverState=== 'ADMIN_APPROVED' ? '#4DC7A0': (driver?.driverState=== 'ADMIN_REJECTED' ? '#FFD176':'#3DAEC7')) }">
+                {{driver?.driverState}}
+            </div>
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Full Name</span>
+            </div>
+            <input [value]="driver?.name" disabled="disabled" required="required" type="text" class="form-control"
+                   aria-label="Default" aria-describedby="inputGroup-sizing-default">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Birthday</span>
+            </div>
+            <input [value]="driverDOB" disabled="disabled" type="date" class="form-control" aria-label="Default"
+                   aria-describedby="inputGroup-sizing-default">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Address</span>
+            </div>
+            <input [(ngModel)]="driver.address" type="text" class="form-control" aria-label="Default"
+                   aria-describedby="inputGroup-sizing-default">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Email</span>
+            </div>
+            <input [value]="driver?.email" disabled="disabled" type="email" class="form-control" aria-label="Default"
+                   aria-describedby="inputGroup-sizing-default">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">NIC</span>
+            </div>
+            <input [value]="driver?.nic" disabled="disabled" type="number" class="form-control" aria-label="Default"
+                   aria-describedby="inputGroup-sizing-default">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Licence No</span>
+            </div>
+            <input [value]="driver?.licenceNo" disabled="disabled" class="form-control" aria-label="Default"
+                   aria-describedby="inputGroup-sizing-default">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Phone No</span>
+            </div>
+            <input [(ngModel)]="driver.phoneNo" class="form-control" aria-label="Default"
+                   aria-describedby="inputGroup-sizing-default">
+        </div>
+
+        <ng-container *ngIf="driver.nicFrontImageId">
+            <span class="input-group-text">NIC Front Image</span>
+            <div class="input-group mb-3">
+                <img class="img" [src]="imgUrl+'/image/'+driver.nicFrontImageId" alt="">
+            </div>
+        </ng-container>
+
+        <ng-container *ngIf="driver.nicBackImageId">
+            <span class="input-group-text">NIC Back Image</span>
+            <div class="input-group mb-3">
+                <img class="img" [src]="imgUrl+'/image/'+driver.nicBackImageId" alt="">
+            </div>
+        </ng-container>
+
+        <ng-container *ngIf="driver.faceImageId">
+            <span class="input-group-text">Face Image</span>
+            <div class="input-group mb-3">
+                <img class="img" [src]="imgUrl+'/image/'+driver.faceImageId" alt="">
+            </div>
+        </ng-container>
+
+
+        <ng-container *ngIf="driver.licenceFrontImageId">
+            <span class="input-group-text">Licence Front Image</span>
+            <div class="input-group mb-3">
+                <img class="img" [src]="imgUrl+'/image/'+driver.licenceFrontImageId" alt="">
+            </div>
+        </ng-container>
+
+        <ng-container *ngIf="driver.licenceBackImageId">
+            <span class="input-group-text">Licence Back Image</span>
+            <div class="input-group mb-3">
+                <img class="img" [src]="imgUrl+'/image/'+driver.licenceBackImageId" alt="">
+            </div>
+        </ng-container>
+
+        <div class="input-group mb-3">
+            <div class="form-check form-check-inline">
+                <input (change)="selectDoc('U')" name="doc" class="form-check-input" type="radio" value="U">
+                <label class="form-check-label">Utility Bill Image</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input (change)="selectDoc('B')" name="doc" class="form-check-input" type="radio" value="B">
+                <label class="form-check-label">Bank Statement Image</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input (change)="selectDoc('N')" name="doc" class="form-check-input" type="radio" value="N">
+                <label class="form-check-label">Council Tax bill Image</label>
+            </div>
+        </div>
+
+        <!--        utility bill starts-->
+        <div class="input-group mb-3" *ngIf="documentType === 'U'">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Utility Bill Image</span>
+            </div>
+            <div class="custom-file">
+                <input required="required" (change)="onFileChanged($event, 'utilityBill')" type="file"
+                       class="custom-file-input">
+                <label class="custom-file-label">Choose file</label>
+            </div>
+            <div class="input-group mb-3">
+                <img class="img" [src]="imgUrl+'/image/'+driver.utilityBillId" alt="">
+            </div>
+        </div>
+        <!--        utility bill ends-->
+        <!--        bank statement start-->
+
+        <div class="input-group mb-3" *ngIf="documentType === 'B'">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Bank Statement Image</span>
+            </div>
+            <div class="custom-file">
+                <input required="required" (change)="onFileChanged($event, 'bankStatement')" type="file"
+                       class="custom-file-input">
+                <label class="custom-file-label">Choose file</label>
+            </div>
+            <div class="input-group mb-3">
+                <img class="img" [src]="imgUrl+'/image/'+driver.bankStatementId" alt="">
+            </div>
+        </div>
+        <!--        bank statement end-->
+        <!--        council tax start-->
+
+        <div class="input-group mb-3" *ngIf="documentType === 'N'">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Council Tax Image</span>
+            </div>
+            <div class="custom-file">
+                <input required="required" (change)="onFileChanged($event, 'councilTaxImage')" type="file"
+                       class="custom-file-input">
+                <label class="custom-file-label">Choose file</label>
+            </div>
+            <div class="input-group mb-3">
+                <img class="img" [src]="imgUrl+'/image/'+driver.councilTaxImageId" alt="">
+            </div>
+        </div>
+
+        <!--        council tax end-->
+
+        <div class="input-group mb-3" style="float: right" *ngIf="driver.driverState !== 'BLACK_LISTED'">
+            <button (click)="update()" class="btn bg-primary mr-2">Update</button>
+        </div>
+    </div>
+</div>

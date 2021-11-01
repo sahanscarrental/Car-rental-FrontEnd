@@ -1,0 +1,59 @@
+<!-- Rent A Car Start -->
+<div class="container-fluid py-5">
+    <div class="container pt-5 pb-3">
+        <h1 class="display-4 text-uppercase text-center mb-5">Find Your Car</h1>
+        <div class="row vehicle-card">
+            <div *ngFor="let car of vehicleList">
+                <div class="rent-item mb-4">
+                        <img class="img-fluid mb-4" style="height: 400px; width: 400px;"
+                             [src]="imgUrl+'/image/'+car.imageId" alt="">
+                        <h4 class="text-uppercase mb-4">{{car.name}}</h4>
+                        <div class="d-flex justify-content-center mb-4">
+                            <div class="px-2">
+                                <i class="fa fa-car text-primary mr-1"></i>
+                                <span>{{car.fuelType}}</span>
+                            </div>
+                            <div class="px-2 border-left border-right">
+                                <i class="fa fa-cogs text-primary mr-1"></i>
+                                <span>{{car.gearType}}</span>
+                            </div>
+                            <div class="px-2">
+                                <i class="fa fa-road text-primary mr-1"></i>
+                                <span>{{car.seats}} seats</span>
+                            </div>
+                        </div>
+                        <a [state]="{car: car}" routerLink="../car-booking" class="btn btn-primary px-3"
+                           href="">{{car.costPerDay}} {{car.currency}}/Day</a>
+                        <a (click)="clickCompare(car)" *ngIf="isComparable(car.name)" data-toggle="modal"
+                           data-target=".bd-example-modal-lg" class="btn btn-primary px-3" href="">Compare</a>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Rent A Car End -->
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <table class="table table-dark">
+                <thead>
+                <tr>
+                    <th scope="col">Duration</th>
+                    <th scope="col">Our Vehicle</th>
+                    <th scope="col">Malkey Rent a Car</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">Per Day</th>
+                    <td>{{compareVehicle.costPerDay | number: '1.2-2'}} {{compareVehicle.currency}}</td>
+                    <td>{{compareOtherVehicle.ratePerDay | number: '1.2-2'}} {{compareOtherVehicle.rateCurrency}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+

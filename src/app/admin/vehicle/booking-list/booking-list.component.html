@@ -1,0 +1,57 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <i class="fa fa-align-justify"></i>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered table-striped table-sm">
+                    <thead>
+                    <tr>
+                        <th>Vehicle</th>
+                        <th>Pick Up</th>
+                        <th>Return</th>
+                        <th>Driver</th>
+                        <th>Driver Email</th>
+                        <th>Return at night</th>
+                        <th>Cost</th>
+                        <th>Currency</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let booking of bookingList">
+                        <td>{{booking?.vehicle?.name}}</td>
+                        <td>{{booking?.pickUpTime | date:'short'}}</td>
+                        <td>{{booking?.dropTime | date:'short'}}</td>
+                        <td>{{booking?.vehicleDriver.name}}</td>
+                        <td>{{booking?.vehicleDriver.email}}</td>
+                        <td>{{booking?.returnAtNight ? 'Yes' : 'No' }}</td>
+                        <td>{{booking?.cost | number}}</td>
+                        <td>{{booking?.currency}}</td>
+                        <td [ngStyle]="{'background-color':
+                        booking?.bookingRecordState === 'PENDING' ? '#FFF133' :
+                        (booking?.bookingRecordState === 'PICKED' ? '#4DC7A0':
+                        (booking?.bookingRecordState === 'COMPLETED' ? '#FFBF47':
+                        (booking?.bookingRecordState === 'CANCELED' ? '#6CCFFF':'#F77D0A'))) }">
+                            {{booking?.bookingRecordState | titlecase}}
+                        </td>
+                        <td>
+                            <div class="btn-group mr-2" role="group" aria-label="First group">
+                                <a type="button" [state]="booking" routerLink="../booking-view" class="btn btn-secondary">View</a>
+                                <!--                                <button type="button" class="btn btn-secondary">2</button>-->
+                                <!--                                <button type="button" class="btn btn-secondary">3</button>-->
+                                <!--                                <button type="button" class="btn btn-secondary">4</button>-->
+                            </div>
+                            <!--                            <button (click)="delete(booking.id)" type="button" class="btn btn-block btn-danger">Danger</button>-->
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--            <img src="data:image/jpeg;base64, vnnkj" alt="">-->

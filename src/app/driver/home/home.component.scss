@@ -1,0 +1,16 @@
+.page-header {
+  height: 400px;
+  margin-bottom: 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(rgba(28, 30, 50, .9), rgba(28, 30, 50, .9)), url('../../../assets/img/driver/bg-banner.jpg');
+  background-attachment: fixed;
+}
+
+
+.hed{
+  cursor: pointer;
+}
+

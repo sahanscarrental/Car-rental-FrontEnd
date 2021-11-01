@@ -1,0 +1,138 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <strong>Add Vehicle</strong>
+            </div>
+            <div class="card-body">
+                <form (ngSubmit)="submit()" [formGroup]="vehicleForm" action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label" for="select">Garage</label>
+                        <div class="col-md-9">
+                            <select id="select" formControlName="garage" class="form-control" size="1" >
+                                <option *ngFor="let garage of garageList" [value]="garage.id">{{garage.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label" for="name">Name </label>
+                        <div class="col-md-9">
+                            <input formControlName="name" type="text" id="name" class="form-control" placeholder="Name">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label" for="name">Vehicle No </label>
+                        <div class="col-md-9">
+                            <input formControlName="vehicleNo" type="text" id="vehicleNo" class="form-control" placeholder="vehicle No">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label" for="seats">Seats </label>
+                        <div class="col-md-9">
+                            <input formControlName="seats" type="number" id="seats"  class="form-control" placeholder="Seats">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label" for="costPerDay">Cost per day </label>
+                        <div class="col-md-9">
+                            <input formControlName="costPerDay" type="number" id="costPerDay" class="form-control" placeholder="Cost Per Day">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label" >Currency</label>
+                        <div class="col-md-9 col-form-label">
+                            <div class="form-check form-check-inline mr-1" id="lkr-">
+                                <input formControlName="currency" class="form-check-input" type="radio"  id="lkr" value="LKR">
+                                <label class="form-check-label" for="lkr">LKR</label>
+                            </div>
+                            <div class="form-check form-check-inline mr-1">
+                                <input formControlName="currency" class="form-check-input" type="radio"  id="usd" value="USD">
+                                <label class="form-check-label" for="usd">USD</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label" >Gear Type</label>
+                        <div class="col-md-9 col-form-label">
+                            <div class="form-check form-check-inline mr-1">
+                                <input formControlName="gearType" class="form-check-input" type="radio"  id="MANUAL" value="MANUAL">
+                                <label class="form-check-label" for="MANUAL">MANUAL</label>
+                            </div>
+                            <div class="form-check form-check-inline mr-1">
+                                <input formControlName="gearType" class="form-check-input" type="radio"  id="AUTO" value="AUTO">
+                                <label class="form-check-label" for="AUTO">AUTO</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label" >Fuel Type</label>
+                        <div class="col-md-9 col-form-label">
+                            <div class="form-check form-check-inline mr-1">
+                                <input formControlName="fuelType" class="form-check-input" type="radio"  id="ELECTRIC" value="ELECTRIC">
+                                <label class="form-check-label" for="ELECTRIC">ELECTRIC</label>
+                            </div>
+                            <div class="form-check form-check-inline mr-1">
+                                <input formControlName="fuelType" class="form-check-input" type="radio"  id="PETROL" value="PETROL">
+                                <label class="form-check-label" for="AUTO">PETROL</label>
+                            </div>
+                            <div class="form-check form-check-inline mr-1">
+                                <input formControlName="fuelType" class="form-check-input" type="radio"  id="DIESEL" value="DIESEL">
+                                <label class="form-check-label" for="DIESEL">DIESEL</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label" >Category</label>
+                        <div class="col-md-9 col-form-label">
+                            <div class="form-check form-check-inline mr-1">
+                                <input formControlName="vehicleCategory" class="form-check-input" type="radio"  id="SMALL_TOWN_CARS" value="SMALL_TOWN_CARS">
+                                <label class="form-check-label" for="SMALL_TOWN_CARS">SMALL TOWN CARS</label>
+                            </div>
+                            <div class="form-check form-check-inline mr-1">
+                                <input formControlName="vehicleCategory" class="form-check-input" type="radio"  id="SMALL_FAMILY_HATCHBACKS" value="SMALL_FAMILY_HATCHBACKS">
+                                <label class="form-check-label" for="SMALL_FAMILY_HATCHBACKS">SMALL FAMILY HATCHBACKS</label>
+                            </div>
+                            <div class="form-check form-check-inline mr-1">
+                                <input formControlName="vehicleCategory" class="form-check-input" type="radio"  id="LARGE_FAMILY_SALOON" value="LARGE_FAMILY_SALOON">
+                                <label class="form-check-label" for="LARGE_FAMILY_SALOON">LARGE FAMILY SALOON</label>
+                            </div>
+                            <div class="form-check form-check-inline mr-1">
+                                <input formControlName="vehicleCategory" class="form-check-input" type="radio"  id="LARGE_FAMILY_ESTATE" value="LARGE_FAMILY_ESTATE">
+                                <label class="form-check-label" for="LARGE_FAMILY_ESTATE">LARGE FAMILY ESTATE</label>
+                            </div>
+                            <div class="form-check form-check-inline mr-1">
+                                <input formControlName="vehicleCategory" class="form-check-input" type="radio"  id="MEDIUM_VANS" value="MEDIUM_VANS">
+                                <label class="form-check-label" for="MEDIUM_VANS">MEDIUM VANS</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label" >Description</label>
+                        <div class="col-md-9">
+                            <textarea formControlName="description" id="description" name="textarea-input" rows="9" class="form-control" placeholder="Description.."></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label" for="file-input">File input</label>
+                        <div class="col-md-9">
+                            <input (change)="onFileChange($event)" formControlName="image" type="file" id="file-input">
+                        </div>
+                    </div>
+                    <ng-container *ngIf="vehicleForm.controls['image'].value">
+                        <div class="input-group mb-3">
+                            <img class="img" [src]="url" alt="uploaded-image" style=" width: 190px; height: 130px;">
+                        </div>
+                    </ng-container>
+                    <div class="form-group row" style="float: right">
+                        <button type="submit" class="btn btn-sm btn-primary" [disabled]="vehicleForm.invalid"
+                        ><i class="fa fa-dot-circle-o"></i> Submit</button>
+                        <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div><!--/.row-->

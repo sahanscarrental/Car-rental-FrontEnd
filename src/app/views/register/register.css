@@ -1,0 +1,20 @@
+.app-body{
+    height: 100%;
+
+    /* Center and scale the image nicely */
+    background: url(../../../assets/img/driver/about.png) no-repeat center;
+    background-size: 1200px;
+}
+.img{
+    width: 20%;
+}
+
+.err{
+    margin-top: -14px;
+}
+
+.input-group-text:after {
+    content:" *";
+    color: red;
+    padding-left: 2px;
+}

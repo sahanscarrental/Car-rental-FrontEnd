@@ -1,0 +1,45 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <i class="fa fa-align-justify"></i>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered table-striped table-sm">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>NIC</th>
+                        <th>User Status</th>
+                        <th>Driver Status</th>
+                        <th>Phone No</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let driver of driverList">
+                        <td>{{driver?.name}}</td>
+                        <td>{{driver?.email}}</td>
+                        <td>{{driver?.nic}}</td>
+                        <td [ngStyle]="{'background-color':driver?.user?.userStatus=== 'ACTIVATED' ? '#4DC7A0' : '#F77D0A' }">
+                            {{driver?.user?.userStatus}}
+                        </td>
+                        <td [ngStyle]="{'background-color':driver?.driverState=== 'BLACK_LISTED' ? '#F77D0A'
+                        : (driver?.driverState=== 'ADMIN_APPROVED' ? '#4DC7A0': (driver?.driverState=== 'ADMIN_REJECTED' ? '#FFD176':'#3DAEC7')) }">
+                            {{driver?.driverState}}
+                        </td>
+                        <td>{{driver?.phoneNo}}</td>
+                        <td>
+                            <div class="btn-group mr-2" role="group" aria-label="First group">
+                                <a type="button" [state]="driver" routerLink="../driver-view" class="btn btn-secondary">View</a>
+                                <button type="button" (click)="delete(driver.id)" class="btn btn-danger">Delete</button>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

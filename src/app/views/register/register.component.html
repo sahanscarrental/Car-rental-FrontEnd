@@ -1,0 +1,326 @@
+<div class="app-body">
+    <main class="main d-flex align-items-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 mx-auto">
+                    <div class="card mx-4">
+                        <div class="card-body p-4">
+                            <form *ngIf="!accountCreated" [formGroup]="registerForm" (ngSubmit)="submit()">
+                                <h1>Register</h1>
+                                <span>Already have a account, </span>
+                                <div class="row">
+                                    <button type="button" class="btn btn-primary active mt-3"
+                                            style="margin-bottom: 4px; margin-left: 15px"
+                                            (click)="routeToLogin()">
+                                        <span>Sign In</span>
+                                    </button>
+                                </div>
+                                <br>
+                                <!-- name starts-->
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Full Name</span>
+                                    </div>
+                                    <input
+                                            (keydown)=lettersOnly($event) (keyup)=lettersOnly($event)
+                                            required="required"
+                                            type="text"
+                                            formControlName="name" class="form-control" aria-label="Default"
+                                            aria-describedby="inputGroup-sizing-default">
+                                </div>
+                                <div class="input-group mb-3"
+                                     *ngIf="(registerForm.controls?.name?.touched || registerForm.controls?.name?.dirty) && registerForm.controls?.name?.errors?.required">
+                                    <label class="text-danger err">
+                                        Full name is required
+                                    </label>
+                                </div>
+                                <!--  name ends-->
+                                <!--  dob starts-->
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Birthday</span>
+                                    </div>
+                                    <input max='2003-01-01' type="date" formControlName="dob" min='1940-01-01'
+                                           class="form-control" aria-label="Default"
+                                           aria-describedby="inputGroup-sizing-default">
+                                </div>
+                                <div class="input-group mb-3"
+                                     *ngIf="(registerForm.controls?.dob?.touched || registerForm.controls?.dob?.dirty) && registerForm.controls?.dob?.errors?.required">
+                                    <label class="text-danger err">
+                                        Birthday is required
+                                    </label>
+                                </div>
+                                <!-- dob ends-->
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Address</span>
+                                    </div>
+                                    <input type="text" formControlName="address" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                                </div>
+                                <div class="input-group mb-3"
+                                     *ngIf="(registerForm.controls?.address?.touched || registerForm.controls?.address?.dirty) && registerForm.controls?.address?.errors?.required">
+                                    <label class="text-danger err">
+                                        Address is required
+                                    </label>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Email</span>
+                                    </div>
+                                    <input type="email" formControlName="email" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                                </div>
+                                <div class="input-group mb-3" *ngIf="registerForm.controls['email'].hasError('email')">
+                                    <label class="text-danger err">
+                                        Enter a valid email address!
+                                    </label>
+                                </div>
+                                <div class="input-group mb-3" *ngIf="registerForm.controls['email'].hasError('required')">
+                                    <label class="text-danger err">
+                                        Email address is required
+                                    </label>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Password</span>
+                                    </div>
+                                    <input
+                                            type="password" formControlName="password"
+                                            class="form-control" aria-label="Default"
+                                            aria-describedby="inputGroup-sizing-default"
+                                            maxlength="8">
+                                </div>
+                                <div class="input-group mb-3" *ngIf="registerForm.controls['password'].hasError('hasNumber')">
+                                    <label class="text-danger err">
+                                        Must contain atleast 1 number!
+                                    </label>
+                                </div>
+                                <div class="input-group mb-3" *ngIf="registerForm.controls['password'].hasError('hasCapitalCase')">
+                                    <label class="text-danger err">
+                                        Must contain atleast 1 uppercase letter!
+                                    </label>
+                                </div>
+                                <div class="input-group mb-3" *ngIf="registerForm.controls['password'].hasError('hasSmallCase')">
+                                    <label class="text-danger err">
+                                        Must contain atleast 1 lowercase letter!
+                                    </label>
+                                </div>
+                                <div class="input-group mb-3" *ngIf="registerForm?.value.password?.length < 8">
+                                    <label class="text-danger err">
+                                        Must contain atleast 8 characters!
+                                    </label>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Confirmed Password</span>
+                                    </div>
+                                    <input
+                                            maxlength="8"
+                                            type="password"
+                                            formControlName="confirmedPassword"
+                                            class="form-control"
+                                            aria-label="Default"
+                                            aria-describedby="inputGroup-sizing-default">
+                                </div>
+                                <div class="input-group mb-3" *ngIf="registerForm.controls['confirmedPassword'].hasError('NoPassswordMatch')">
+                                    <label class="text-danger err">
+                                        Password do not match
+                                    </label>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">NIC</span>
+                                    </div>
+                                    <input
+                                            (keydown)=numbersOnly($event) (keyup)=numbersOnly($event)
+                                            placeholder="numbers only"
+                                            maxlength="12"
+                                            formControlName="nic" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                                </div>
+                                <div class="input-group mb-3" *ngIf="registerForm.controls.nic?.errors?.minlength">
+                                    <label class="text-danger err">
+                                        Must contain atleast 9 number!
+                                    </label>
+                                </div>
+                                <div class="input-group mb-3" *ngIf="(registerForm.controls?.nic?.touched || registerForm.controls?.nic?.dirty) && registerForm.controls?.nic?.errors?.required">
+                                    <label class="text-danger err">
+                                       NIC is required
+                                    </label>
+                                </div>
+                                <!--license number start-->
+
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Licence No</span>
+                                    </div>
+                                    <input
+                                            maxlength="20"
+                                            formControlName="licenceNo" class="form-control" aria-label="Default" placeholder="B1234567"
+                                            aria-describedby="inputGroup-sizing-default">
+                                </div>
+                                <div class="input-group mb-3"
+                                     *ngIf="(registerForm.controls?.licenceNo?.touched || registerForm.controls?.licenceNo?.dirty) && registerForm.controls?.licenceNo?.errors?.required">
+                                    <label class="text-danger err">
+                                        License No is required
+                                    </label>
+                                </div>
+                                <div class="input-group mb-3"
+                                     *ngIf="(registerForm.controls?.licenceNo?.touched || registerForm.controls?.licenceNo?.dirty) && registerForm.controls?.licenceNo?.errors?.minlength">
+                                    <label class="text-danger err">
+                                        License No should at least be 8 characters
+                                    </label>
+                                </div>
+                                <div class="input-group mb-3"
+                                     *ngIf="(registerForm.controls?.licenceNo?.touched || registerForm.controls?.licenceNo?.dirty) && registerForm.controls?.licenceNo?.errors?.maxlength">
+                                    <label class="text-danger err">
+                                        License No maximum should be 8 characters
+                                    </label>
+                                </div>
+                                <!-- license no end-->
+
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Phone No</span>
+                                    </div>
+                                    <ngx-intl-tel-input
+                                            [cssClass]="'custom'"
+                                            [preferredCountries]="[CountryISO.UnitedStates, CountryISO.UnitedKingdom]"
+                                            [enableAutoCountrySelect]="false"
+                                            [enablePlaceholder]="true"
+                                            [searchCountryFlag]="true"
+                                            [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
+                                            [selectFirstCountry]="false"
+                                            [selectedCountryISO]="CountryISO.SriLanka"
+                                            [maxLength]="12"
+                                            [phoneValidation]="true"
+                                            formControlName="phoneNo"
+                                    ></ngx-intl-tel-input>
+                                    <div class="input-group mb-3" *ngIf="(registerForm.controls?.phoneNo?.touched) && registerForm.controls['phoneNo'].invalid">
+                                        <label class="text-danger err">
+                                            Please enter a valid Mobile number
+                                        </label>
+                                    </div>
+<!--                                    <input type="number" formControlName="phoneNo" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">-->
+                                </div>
+                                <div class="input-group mb-3" *ngIf="(registerForm.controls?.phoneNo?.touched) && registerForm.controls?.phoneNo?.errors?.required">
+                                    <label class="text-danger err">
+                                        please enter a mobile number
+                                    </label>
+                                </div>
+
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Face Image</span>
+                                    </div>
+                                    <div class="custom-file">
+                                        <input required="required" (change)="onFileChanged($event, 'faceImage')" type="file" class="custom-file-input">
+                                        <label class="custom-file-label">Choose file</label>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <img class="img" [src]="faceImageUrl" alt="">
+                                </div>
+
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Licence Front Image</span>
+                                    </div>
+                                    <div class="custom-file">
+                                        <input required="required" (change)="onFileChanged($event, 'licenceFrontImage')" type="file" class="custom-file-input">
+                                        <label class="custom-file-label">Choose file</label>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <img class="img" [src]="licenceFrontImageUrl" alt="">
+                                </div>
+
+                                <div class="input-group mb-3">
+                                    <div class="form-check form-check-inline">
+                                        <input (change)="selectDoc('U')" name="doc" class="form-check-input" type="radio"  value="U">
+                                        <label class="form-check-label" >Utility Bill Image</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input (change)="selectDoc('B')"  name="doc" class="form-check-input" type="radio"  value="B">
+                                        <label class="form-check-label" >Bank Statement Image</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input (change)="selectDoc('N')" name="doc" class="form-check-input" type="radio"  value="N">
+                                        <label class="form-check-label" >Council Tax bill Image</label>
+                                    </div>
+                                </div>
+
+
+                                <div class="input-group mb-3" *ngIf="documentType === 'U'">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Utility Bill Image</span>
+                                    </div>
+                                    <div class="custom-file">
+                                        <input required="required" (change)="onFileChanged($event, 'utilityBill')" type="file" class="custom-file-input">
+                                        <label class="custom-file-label">Choose file</label>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <img class="img" [src]="utilityBillUrl" alt="">
+                                </div>
+
+                                <div class="input-group mb-3" *ngIf="documentType === 'B'">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Bank Statement Image</span>
+                                    </div>
+                                    <div class="custom-file">
+                                        <input required="required" (change)="onFileChanged($event, 'bankStatement')" type="file" class="custom-file-input">
+                                        <label class="custom-file-label">Choose file</label>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <img class="img" [src]="bankStatementUrl" alt="">
+                                </div>
+
+                                <div class="input-group mb-3" *ngIf="documentType === 'N'">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Council Tax Image</span>
+                                    </div>
+                                    <div class="custom-file">
+                                        <input required="required" (change)="onFileChanged($event, 'councilTaxImage')" type="file" class="custom-file-input">
+                                        <label class="custom-file-label">Choose file</label>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <img class="img" [src]="councilTaxImageUrl" alt="">
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class=" form-check">
+                                            <input formControlName="terms" class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                            <label class="form-check-label" for="defaultCheck1">
+                                                I accept the <a [routerLink]="'/terms'">term and conditions</a>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+
+                                <input [disabled]="registerForm.invalid" type="submit" value="Create Account" class="btn btn-block btn-success">
+<!--                                <p   (click)="checkErrors()" class="btn btn-block btn-success">Create</p>-->
+                            </form>
+                            <form *ngIf="accountCreated" [formGroup]="emailVerifyForm" (ngSubmit)="otpSubmit()">
+                                <h1>Verify Email</h1>
+                                <p class="text-muted">Please check you'r Email and enter the One Time Password here</p>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">OTP</span>
+                                    </div>
+                                    <input required="required" type="number" formControlName="otp" class="form-control"
+                                           aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                                </div>
+                                <input [disabled]="!emailVerifyForm.valid" type="submit"
+                                       value="Verify" class="btn btn-block btn-success">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
