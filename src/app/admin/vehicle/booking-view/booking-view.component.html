@@ -37,7 +37,7 @@
         <tab heading="Addons">
             <table class="table table-bordered table-striped table-sm">
                 <tbody>
-                    <tr *ngFor="let addon of booking.addons">
+                    <tr *ngFor="let addon of booking?.addons">
                         <td>
                             <img style="width: 50px" [src]="imgUrl+'/image/'+addon.imageId" alt="">
                         </td>
