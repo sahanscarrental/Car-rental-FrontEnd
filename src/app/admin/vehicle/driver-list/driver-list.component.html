@@ -10,7 +10,7 @@
                     <tr>
                         <th>Name</th>
                         <th>Email</th>
-                        <th>NIC</th>
+                        <th>License No</th>
                         <th>User Status</th>
                         <th>Driver Status</th>
                         <th>Phone No</th>
@@ -21,7 +21,7 @@
                     <tr *ngFor="let driver of driverList">
                         <td>{{driver?.name}}</td>
                         <td>{{driver?.email}}</td>
-                        <td>{{driver?.nic}}</td>
+                        <td>{{driver?.licenceNo}}</td>
                         <td [ngStyle]="{'background-color':driver?.user?.userStatus=== 'ACTIVATED' ? '#4DC7A0' : '#F77D0A' }">
                             {{driver?.user?.userStatus}}
                         </td>
