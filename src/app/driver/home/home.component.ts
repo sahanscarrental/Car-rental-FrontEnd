@@ -33,8 +33,12 @@ export class HomeComponent implements OnInit {
 
   public token: any;
   ngOnInit(): void {
+    if (!this.authService.token) {
+      this.authService.initializeAuthData(JSON.parse(localStorage.getItem('authData')));
+    }
     this.token = this.authService.token;
-    this.isLoggedIn = this.authService.isLoggedIn;
+    this.isLoggedIn = Boolean(localStorage.getItem('isLoggedIn'));
+    this.authService.isLoggedIn = this.isLoggedIn;
     this.imgUrl = this.fileService.url;
 
     if (this.isLoggedIn) {
