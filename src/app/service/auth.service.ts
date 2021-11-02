@@ -28,11 +28,13 @@ export class AuthService {
   logout () {
       localStorage.removeItem("email");
       localStorage.removeItem("password");
+      localStorage.removeItem("authData");
       this._token = null;
       this._type = null;
       this._userId = null;
       this._driver = null;
       this._roles = null;
+      localStorage.setItem('isLoggedIn', String(false));
       this.router.navigate(['/login']);
   }
 
@@ -53,6 +55,8 @@ export class AuthService {
           this._driver = driver;
 
           this.isLoggedIn = true;
+          localStorage.setItem('authData', JSON.stringify(res.body));
+          localStorage.setItem('isLoggedIn', String(true));
 
           if (roles[0] == Role.ROLE_ADMIN) {
               this.router.navigate(['/dashboard']);
@@ -60,6 +64,20 @@ export class AuthService {
               this.router.navigate(['/driver']);
           }
         })
+  }
+
+  initializeAuthData(authData: any) {
+      const token = authData.token;
+      const type = authData.type;
+      const userId = authData.id;
+      const roles = authData.roles;
+      const driver = authData.driver;
+      this._token = token;
+      this._type = type;
+      this._userId = userId;
+      this.userName = authData.username;
+      this._roles = roles;
+      this._driver = driver;
   }
 
   reset(email: string, password: string) {
