@@ -142,7 +142,12 @@ export class CarBookingComponent implements OnInit {
         }, error => {
           console.log(error);
         })
-    this.car = history.state.car;
+
+    if (history.state.car) {
+      this.car = history.state.car;
+    } else {
+      this.car = JSON.parse(localStorage.getItem('car'));
+    }
 
     console.log('past bookingRecord from: ', this.bookingRecord);
     if (history.state.bookingRecord) {
@@ -159,7 +164,7 @@ export class CarBookingComponent implements OnInit {
       console.log('maximumExtendTime: ', this.maximumExtendTime);
     }
 
-    if (history.state.bookingRecord != undefined){
+    if (this.bookingRecord != undefined && this.bookingRecord.addons) {
       this.bookingRecord.addons.forEach(a => this.addonIds.push(a.id))
       theDate = new Date(this.bookingRecord.dropTime);
       dd = String(theDate.getDate()).padStart(2, '0');
@@ -246,11 +251,11 @@ export class CarBookingComponent implements OnInit {
     return true;
   }
   isChecked(addon: any) {
-    if (this.bookingRecord == null) {
+    if (this.bookingRecord == null || !this.bookingRecord.addons) {
       return false;
-    }else {
+    } else {
       const addonIds: string[] = this.bookingRecord.addons.map(ad => ad.id)
-      return addonIds.includes(addon.id)
+      return addonIds.includes(addon.id);
     }
   }
 

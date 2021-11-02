@@ -22,8 +22,8 @@
                                 <span>{{car.seats}} seats</span>
                             </div>
                         </div>
-                        <a [state]="{car: car}" routerLink="../car-booking" class="btn btn-primary px-3"
-                           href="">{{car.costPerDay}} {{car.currency}}/Day</a>
+                        <a  (click)="viewCarBooking(car)" class="btn btn-primary px-3"
+                           >{{car.costPerDay}} {{car.currency}}/Day</a>
                         <a (click)="clickCompare(car)" *ngIf="isComparable(car.name)" data-toggle="modal"
                            data-target=".bd-example-modal-lg" class="btn btn-primary px-3" href="">Compare</a>
                     </div>
@@ -47,8 +47,8 @@
                 <tbody>
                 <tr>
                     <th scope="row">Per Day</th>
-                    <td>{{compareVehicle.costPerDay | number: '1.2-2'}} {{compareVehicle.currency}}</td>
-                    <td>{{compareOtherVehicle.ratePerDay | number: '1.2-2'}} {{compareOtherVehicle.rateCurrency}}</td>
+                    <td>{{compareVehicle?.costPerDay | number: '1.2-2'}} {{compareVehicle?.currency}}</td>
+                    <td>{{compareOtherVehicle?.ratePerDay | number: '1.2-2'}} {{compareOtherVehicle?.rateCurrency}}</td>
                 </tr>
                 </tbody>
             </table>

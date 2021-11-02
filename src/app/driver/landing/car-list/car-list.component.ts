@@ -3,6 +3,7 @@ import {VehicleService} from "../../../admin/service/vehicle.service";
 import {FileService} from "../../../service/file.service";
 import {ModalDirective} from "ngx-bootstrap/modal";
 import {WebScrapingService} from "../../../service/web-scraping.service";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-car-list',
@@ -19,6 +20,7 @@ export class CarListComponent implements OnInit {
   @ViewChild('largeModal') public largeModal: ModalDirective;
   public imgUrl = "";
   constructor(
+      private router: Router,
       private vehicleService: VehicleService,
       public fileService: FileService,
       private scrapingService: WebScrapingService
@@ -56,6 +58,11 @@ export class CarListComponent implements OnInit {
 
   newBeDev() {
 
+  }
+
+  viewCarBooking(car) {
+    localStorage.setItem('car', JSON.stringify(car));
+    this.router.navigate(['/driver/home/car-booking'], {state: {car: car}});
   }
 
   getAll() {
