@@ -40,6 +40,10 @@ export class RegisterComponent implements OnInit{
     numbersOnly(e) {
         const keyCode = (e.keyCode ? e.keyCode : e.which);
         const invalidChars = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '+'];
+        if (keyCode === 8 || keyCode === 9) {
+            // for backspace and tab
+            return;
+        }
         // 48 -> 0,56 -> 8, 57 -> 9, 96 -> Numpad 0, 105 -> Numpad 9
         if ((keyCode < 48) || (keyCode > 57 && keyCode < 96) || (keyCode > 105)) {
             e.preventDefault();
@@ -104,8 +108,7 @@ export class RegisterComponent implements OnInit{
                     Validators.required, Validators.minLength(8), Validators.maxLength(8)])],
                 address: [null, Validators.compose([Validators.required])],
                 dob: [null, Validators.compose([Validators.required])],
-                nic: [null, Validators.compose([
-                ])],
+                nic: [null, Validators.compose([Validators.required, Validators.minLength(12)])],
                 licenceNo: [null, Validators.compose([
                     Validators.required, Validators.maxLength(8),  Validators.minLength(8)])],
                 phoneNo: [ null, Validators.compose([Validators.required])],
