@@ -14,12 +14,14 @@ export class BookingViewComponent implements OnInit {
   public imgUrl = "";
   public driver: any;
   public booking: any;
+  private driverDOB: string;
   constructor(public fileService: FileService, private bookingRecordService: BookingRecordService, private router: Router) {
     this.imgUrl = fileService.url;
   }
   ngOnInit(): void {
     this.booking = history.state;
-    this.driver = this.booking.vehicleDriver
+    this.driver = this.booking.vehicleDriver;
+    this.driverDOB = this.driver.dob.split('T')[0];
   }
 
   handOveKey() {
