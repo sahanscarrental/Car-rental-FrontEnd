@@ -25,7 +25,12 @@
                 <td>{{bookingRecord?.returnAtNight ?  'Yes' : 'No' }}</td>
                 <td>{{bookingRecord?.cost | number}}</td>
                 <td>{{bookingRecord?.currency}}</td>
-                <td>{{bookingRecord?.bookingRecordState === 'FAILED_TO_PICK' ? 'Failed To Pick up' : bookingRecord?.bookingRecordState | titlecase}}</td>
+                <td [ngStyle]="{'background-color':
+                        bookingRecord?.bookingRecordState === 'PENDING' ? '#DAA520' :
+                        (bookingRecord?.bookingRecordState === 'PICKED' ? '#4DC7A0':
+                        (bookingRecord?.bookingRecordState === 'COMPLETED' ? '#FFB6C1':
+                        (bookingRecord?.bookingRecordState === 'CANCELED' ? '#4682B4':'#F77D0A'))) }"
+                >{{bookingRecord?.bookingRecordState === 'FAILED_TO_PICK' ? 'Failed To Pick up' : bookingRecord?.bookingRecordState | titlecase}}</td>
                 <td><a routerLink="../car-booking" [state]="{car: bookingRecord.vehicle, bookingRecord: bookingRecord }" class="btn btn-info">view</a></td>
             </tr>
             </tbody>
