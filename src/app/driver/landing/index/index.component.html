@@ -43,17 +43,18 @@
 
 
 <!-- Banner Start -->
-<div class="container-fluid py-5">
-    <div class="container py-5">
-        <div class="bg-banner py-5 px-4 text-center">
-            <div class="py-5">
-                <h1 class="display-1 text-uppercase text-primary mb-4">10% OFF</h1>
-                <h1 class="text-uppercase text-light mb-4">Special Offer For New Members</h1>
-                <a class="btn btn-primary mt-2 py-3 px-5" routerLink="/register">Register Now</a>
+<ng-container *ngIf="!isLoggedIn">
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="bg-banner py-5 px-4 text-center">
+                <div class="py-5">
+                    <h1 class="text-uppercase text-light mb-4">Special Offer For New Members</h1>
+                    <a class="btn btn-primary mt-2 py-3 px-5" routerLink="/register">Register Now</a>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</ng-container>
 <!-- Banner End -->
 
 
@@ -79,7 +80,7 @@
                     <div class="text-left">
                         <h3 class="text-uppercase text-light mb-3">Looking for a car?</h3>
                         <p class="mb-4">We have many Vehicles in our Fleet</p>
-                        <a routerLink="/register" class="btn btn-primary py-2 px-4">Start Now</a>
+                        <a routerLink="/driver/home/car-list" class="btn btn-primary py-2 px-4">Start Now</a>
                     </div>
                     <img class="img-fluid flex-shrink-0 mr-n5 w-50 ml-4" src="/assets/img/driver/banner-right.png" alt="">
                 </div>

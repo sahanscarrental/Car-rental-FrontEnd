@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../../service/auth.service';
 
 @Component({
   selector: 'app-index',
@@ -13,9 +14,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IndexComponent implements OnInit {
 
-  constructor() { }
+  public isLoggedIn = false;
+
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.isLoggedIn =  JSON.parse(localStorage.getItem('isLoggedIn'));
   }
 
 }
