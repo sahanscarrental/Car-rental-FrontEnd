@@ -42,7 +42,9 @@ export class HomeComponent implements OnInit {
     this.imgUrl = this.fileService.url;
 
     if (this.isLoggedIn) {
-      this.displayName = this.authService.roles[0] === Role.ROLE_ADMIN ? 'Administrator' : this.authService.driver?.name;
+      if (this.authService.roles) {
+        this.displayName = this.authService.roles[0] === Role.ROLE_ADMIN ? 'Administrator' : this.authService.driver?.name;
+      }
       this.displayUserName = this.authService.userName;
       if (this.authService.driver) {
         this.driverService.get(this.authService.driver.id).subscribe(
