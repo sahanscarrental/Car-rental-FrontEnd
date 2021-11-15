@@ -34,10 +34,10 @@
                         <div class="form-group row">
                             <label class="col-md-3 col-form-label alert alert-success" for="costPerDay">Competitor's Cost Per Day</label>
                             <div class="col-md-9 mt-2">
-                                {{competitorsPrice}} LKR
+                                {{competitorsPrice | number: '1.2-2'}} LKR
                             </div>
                         </div>
-                    </ng-container>
+                    </ng-container>: '1.2-2'
                     <ng-template #scrapElse>
                         <div class="form-group row">
                             <div class="col-md-3 alert alert-danger">
