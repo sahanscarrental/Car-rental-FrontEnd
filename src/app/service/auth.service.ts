@@ -66,19 +66,21 @@ export class AuthService {
         })
   }
 
-  initializeAuthData(authData: any) {
-      const token = authData.token;
-      const type = authData.type;
-      const userId = authData.id;
-      const roles = authData.roles;
-      const driver = authData.driver;
-      this._token = token;
-      this._type = type;
-      this._userId = userId;
-      this.userName = authData.username;
-      this._roles = roles;
-      this._driver = driver;
-  }
+    initializeAuthData(authData: any) {
+        if (authData) {
+            const token = authData.token;
+            const type = authData.type;
+            const userId = authData.id;
+            const roles = authData.roles;
+            const driver = authData.driver;
+            this._token = token;
+            this._type = type;
+            this._userId = userId;
+            this.userName = authData.username;
+            this._roles = roles;
+            this._driver = driver;
+        }
+    }
 
   reset(email: string, password: string) {
       return this.http.post<any>(`${this.b_url}/auth/fought`, {email: email, password: password});
