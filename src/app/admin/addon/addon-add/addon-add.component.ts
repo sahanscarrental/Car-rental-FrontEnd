@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup} from "@angular/forms";
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {AddonService} from "../../service/addon.service";
 import {FileService} from "../../../service/file.service";
 import { Router } from '@angular/router';
@@ -15,7 +15,7 @@ export class AddonAddComponent implements OnInit {
 
   public url = "";
   vehicleForm = new FormGroup({
-    name: new FormControl(''),
+    name: new FormControl('', [Validators.required, Validators.maxLength(50)]),
     imageId: new FormControl(''),
     image: new FormControl(''),
     availableCount: new FormControl(0),

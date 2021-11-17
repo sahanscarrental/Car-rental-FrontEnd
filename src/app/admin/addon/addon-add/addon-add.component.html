@@ -38,7 +38,7 @@
                         <img class="img" [src]="url" alt="">
                     </div>
                     <div class="form-group row" style="float: right">
-                        <button type="submit" class="btn btn-sm btn-primary mx-2" (click)="submit()"><i class="fa fa-dot-circle-o"></i> Submit</button>
+                        <button type="submit" class="btn btn-sm btn-primary mx-2" [disabled]="vehicleForm.invalid" (click)="submit()"><i class="fa fa-dot-circle-o"></i> Submit</button>
                         <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button>
                     </div>
                 </form>
