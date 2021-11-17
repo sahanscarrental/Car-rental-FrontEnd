@@ -91,7 +91,7 @@ export class RegisterComponent implements OnInit{
         return this.fb.group(
             {
                 name: [null, Validators.compose([
-                    Validators.required])
+                    Validators.required, Validators.maxLength(50)])
                 ],
                 email: [null, Validators.compose([
                     Validators.email,
@@ -106,7 +106,7 @@ export class RegisterComponent implements OnInit{
                 ])],
                 confirmedPassword: [null, Validators.compose([
                     Validators.required, Validators.minLength(8), Validators.maxLength(8)])],
-                address: [null, Validators.compose([Validators.required])],
+                address: [null, Validators.compose([Validators.required, Validators.maxLength(50)])],
                 dob: [null, Validators.compose([Validators.required])],
                 nic: [null, Validators.compose([Validators.required, Validators.minLength(12)])],
                 licenceNo: [null, Validators.compose([
