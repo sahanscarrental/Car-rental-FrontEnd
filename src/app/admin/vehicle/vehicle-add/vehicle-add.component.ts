@@ -23,7 +23,7 @@ export class VehicleAddComponent implements OnInit {
     currency: new FormControl('LKR'),
     gearType: new FormControl(''),
     fuelType: new FormControl(''),
-    description: new FormControl(''),
+    description: new FormControl('', [Validators.required, Validators.maxLength(100)]),
     vehicleCategory: new FormControl(''),
     imageId: new FormControl(''),
   });
