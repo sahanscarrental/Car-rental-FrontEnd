@@ -15,7 +15,7 @@ export class VehicleAddComponent implements OnInit {
   public url: string  = "";
   vehicleForm = new FormGroup({
     image: new FormControl(''),
-    name: new FormControl('', [Validators.required, Validators.maxLength(20)]),
+    name: new FormControl('', [Validators.required, Validators.maxLength(50)]),
     vehicleNo: new FormControl('', [Validators.required, Validators.maxLength(20)]),
     seats: new FormControl(4),
     costPerDay: new FormControl(''),
