@@ -14,18 +14,18 @@ export class VehicleAddComponent implements OnInit {
 
   public url: string  = "";
   vehicleForm = new FormGroup({
-    image: new FormControl(''),
+    image: new FormControl('', [Validators.required]),
     name: new FormControl('', [Validators.required, Validators.maxLength(50)]),
     vehicleNo: new FormControl('', [Validators.required, Validators.maxLength(20)]),
-    seats: new FormControl(4),
-    costPerDay: new FormControl(''),
-    garage: new FormControl(''),
-    currency: new FormControl('LKR'),
-    gearType: new FormControl(''),
-    fuelType: new FormControl(''),
+    seats: new FormControl(4, [Validators.required]),
+    costPerDay: new FormControl('', [Validators.required]),
+    garage: new FormControl('', [Validators.required]),
+    currency: new FormControl('LKR', [Validators.required]),
+    gearType: new FormControl('', [Validators.required]),
+    fuelType: new FormControl('', [Validators.required]),
     description: new FormControl('', [Validators.required, Validators.maxLength(100)]),
-    vehicleCategory: new FormControl(''),
-    imageId: new FormControl(''),
+    vehicleCategory: new FormControl('', [Validators.required]),
+    imageId: new FormControl('', [Validators.required]),
   });
 
   constructor(
@@ -35,7 +35,7 @@ export class VehicleAddComponent implements OnInit {
       private router: Router
   ) { }
 
-  garageList: Object = [];
+  garageList: any[] = [];
   ngOnInit(): void {
     this.garageService.getAll().subscribe(value => {
       // @ts-ignore
@@ -51,24 +51,25 @@ export class VehicleAddComponent implements OnInit {
       reader.onload = () => {
         // @ts-ignore
         this.url = reader.result;
-      }
-      this.vehicleForm.patchValue({
-        image: file
-      });
+      };
+
+      this.fileService.upload(file).subscribe(
+          value => {
+            const uploaded = value.body;
+            this.vehicleForm.patchValue({
+              imageId: uploaded.id
+            });
+          });
     }
   }
 
 
   submit() {
-    this.fileService.upload(this.vehicleForm.get('image').value).subscribe(value => {
-      const uploaded = value.body;
-      // @ts-ignore
-      const _garage = this.garageList.find(g => g.id == this.vehicleForm.value.garage );
-      this.vehicleService.add({...this.vehicleForm.value, garage: _garage, imageId: uploaded.id})
-          .subscribe(value => {
-            this.router.navigate(['/dashboard/vehicle/list']);
-          });
-    })
+    const _garage = this.garageList.find(g => g.id === this.vehicleForm.value.garage );
+    this.vehicleService.add({...this.vehicleForm.value, garage: _garage})
+        .subscribe(value => {
+          this.router.navigate(['/dashboard/vehicle/list']);
+        });
 
   }
 }

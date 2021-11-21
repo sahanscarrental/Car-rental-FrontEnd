@@ -7,7 +7,7 @@
             <div class="card-body">
                 <form (ngSubmit)="submit()" [formGroup]="vehicleForm" action="" method="post" enctype="multipart/form-data" class="form-horizontal">
                     <div class="form-group row">
-                        <label class="col-md-3 col-form-label" for="select">Garage</label>
+                        <label class="col-md-3 col-form-label input-group-text" for="select">Garage</label>
                         <div class="col-md-9">
                             <select id="select" formControlName="garage" class="form-control" size="1" >
                                 <option *ngFor="let garage of garageList" [value]="garage.id">{{garage.name}}</option>
@@ -16,31 +16,31 @@
                     </div>
 
                     <div class="form-group row">
-                        <label class="col-md-3 col-form-label" for="name">Name </label>
+                        <label class="col-md-3 col-form-label input-group-text" for="name">Name </label>
                         <div class="col-md-9">
                             <input formControlName="name" type="text" id="name" class="form-control" placeholder="Name">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-3 col-form-label" for="name">Vehicle No </label>
+                        <label class="col-md-3 col-form-label input-group-text" for="name">Vehicle No </label>
                         <div class="col-md-9">
                             <input formControlName="vehicleNo" type="text" id="vehicleNo" class="form-control" placeholder="vehicle No">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-3 col-form-label" for="seats">Seats </label>
+                        <label class="col-md-3 col-form-label input-group-text" for="seats">Seats </label>
                         <div class="col-md-9">
                             <input formControlName="seats" type="number" id="seats"  class="form-control" placeholder="Seats">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-3 col-form-label" for="costPerDay">Cost per day </label>
+                        <label class="col-md-3 col-form-label input-group-text" for="costPerDay">Cost per day </label>
                         <div class="col-md-9">
                             <input formControlName="costPerDay" type="number" id="costPerDay" class="form-control" placeholder="Cost Per Day">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-3 col-form-label" >Currency</label>
+                        <label class="col-md-3 col-form-label input-group-text" >Currency</label>
                         <div class="col-md-9 col-form-label">
                             <div class="form-check form-check-inline mr-1" id="lkr-">
                                 <input formControlName="currency" class="form-check-input" type="radio"  id="lkr" value="LKR">
@@ -54,20 +54,20 @@
                     </div>
 
                     <div class="form-group row">
-                        <label class="col-md-3 col-form-label" >Gear Type</label>
+                        <label class="col-md-3 col-form-label input-group-text" >Gear Type</label>
                         <div class="col-md-9 col-form-label">
                             <div class="form-check form-check-inline mr-1">
                                 <input formControlName="gearType" class="form-check-input" type="radio"  id="MANUAL" value="MANUAL">
                                 <label class="form-check-label" for="MANUAL">MANUAL</label>
                             </div>
                             <div class="form-check form-check-inline mr-1">
-                                <input formControlName="gearType" class="form-check-input" type="radio"  id="AUTO" value="AUTO">
+                                <input required="required" formControlName="gearType" class="form-check-input" type="radio"  id="AUTO" value="AUTO">
                                 <label class="form-check-label" for="AUTO">AUTO</label>
                             </div>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-3 col-form-label" >Fuel Type</label>
+                        <label class="col-md-3 col-form-label input-group-text" >Fuel Type</label>
                         <div class="col-md-9 col-form-label">
                             <div class="form-check form-check-inline mr-1">
                                 <input formControlName="fuelType" class="form-check-input" type="radio"  id="ELECTRIC" value="ELECTRIC">
@@ -85,7 +85,7 @@
                     </div>
 
                     <div class="form-group row">
-                        <label class="col-md-3 col-form-label" >Category</label>
+                        <label class="col-md-3 col-form-label input-group-text" >Category</label>
                         <div class="col-md-9 col-form-label">
                             <div class="form-check form-check-inline mr-1">
                                 <input formControlName="vehicleCategory" class="form-check-input" type="radio"  id="SMALL_TOWN_CARS" value="SMALL_TOWN_CARS">
@@ -110,13 +110,13 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-3 col-form-label" >Description</label>
+                        <label class="col-md-3 col-form-label input-group-text" >Description</label>
                         <div class="col-md-9">
                             <textarea formControlName="description" id="description" name="textarea-input" rows="9" class="form-control" placeholder="Description.."></textarea>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-3 col-form-label" for="file-input">File input</label>
+                        <label class="col-md-3 col-form-label input-group-text" for="file-input">File input</label>
                         <div class="col-md-9">
                             <input (change)="onFileChange($event)" formControlName="image" type="file" id="file-input">
                         </div>
@@ -128,7 +128,7 @@
                     </ng-container>
                     <div class="form-group row" style="float: right">
                         <button type="submit" class="btn btn-sm btn-primary" [disabled]="vehicleForm.invalid"
-                        ><i class="fa fa-dot-circle-o"></i> Submit</button>
+                                style="margin-right: 4px" ><i class="fa fa-dot-circle-o"></i> Submit</button>
                         <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button>
                     </div>
                 </form>

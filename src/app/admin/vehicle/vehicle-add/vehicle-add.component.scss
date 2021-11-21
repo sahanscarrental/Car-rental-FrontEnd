@@ -2,3 +2,9 @@
   width: 200px;
   height: 50px;
 }
+
+.input-group-text:after {
+  content:" *";
+  color: red;
+  padding-left: 2px;
+}
