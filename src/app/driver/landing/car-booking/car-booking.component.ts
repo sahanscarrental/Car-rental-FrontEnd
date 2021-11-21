@@ -210,7 +210,10 @@ export class CarBookingComponent implements OnInit {
           bookingRecordState: cancel ? 'CANCELED' : this.bookingRecord.bookingRecordState
         })
             .subscribe(value => {
-              this.router.navigate(['/driver/home/car-booking']);
+              if (value.status) {
+                this.toastrService.success('Booking Cancelled', 'Success');
+                this.router.navigate(['/driver/home/booking-list']);
+              }
             }, error => {
 
             });
