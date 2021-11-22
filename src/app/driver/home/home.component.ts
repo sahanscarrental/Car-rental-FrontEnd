@@ -37,7 +37,7 @@ export class HomeComponent implements OnInit {
       this.authService.initializeAuthData(JSON.parse(localStorage.getItem('authData')));
     }
     this.token = this.authService.token;
-    this.isLoggedIn = Boolean(localStorage.getItem('isLoggedIn'));
+    this.isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn'));
     this.authService.isLoggedIn = this.isLoggedIn;
     this.imgUrl = this.fileService.url;
 
