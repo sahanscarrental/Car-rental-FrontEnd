@@ -2,10 +2,11 @@ import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTre
 import { Observable } from "rxjs";
 import {AuthService} from "../service/auth.service";
 import {Injectable} from "@angular/core";
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
 export class AuthGuard implements CanActivate{
-    constructor( private router: Router, private authService: AuthService) {
+    constructor( private router: Router, private authService: AuthService, private toastrService: ToastrService) {
     }
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):
         Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree
@@ -25,6 +26,8 @@ export class AuthGuard implements CanActivate{
             const authData = JSON.parse(localStorage.getItem('authData'));
             this.authService.initializeAuthData(authData);
             return true;
+        } else {
+            this.toastrService.error('Please login to view the Page', 'Not Authorized');
         }
 
         this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
