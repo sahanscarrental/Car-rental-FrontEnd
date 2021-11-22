@@ -35,8 +35,7 @@ export const routes: Routes = [
   },
   {
     path: 'car-list',
-    component: CarListComponent,
-    canActivate: [AuthGuard],
+    component: CarListComponent, // car list is quite open for every one to view
     data: {roles: [Role.ROLE_DRIVER]}
   },
   {
