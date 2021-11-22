@@ -20,7 +20,7 @@ export class AuthGuard implements CanActivate{
                 return false;
             }
             return true;
-        } else if (Boolean(localStorage.getItem('isLoggedIn'))) {
+        } else if (JSON.parse(localStorage.getItem('isLoggedIn'))) {
             // added to handle browser refresh
             const authData = JSON.parse(localStorage.getItem('authData'));
             this.authService.initializeAuthData(authData);
